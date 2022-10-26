@@ -10,7 +10,7 @@ public class Card {
      * @param side1 represents the question side
      * @param side2 represents the answer side
      */
-    public Card(String side1, String side2, ArrayList<String> notes) {
+    public Card(String side1, String side2) {
         this.side1 = side1;
         this.side2 = side2;
     }
