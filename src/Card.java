@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Card {
     private String side1;
     private String side2;
-    private ArrayList<String> notes;
+    private ArrayList<String> notes = new ArrayList<>();
 
     /**
      * Constructs new card with two different sides
@@ -31,11 +31,15 @@ public class Card {
         this.side2 = side2;
     }
 
-    public ArrayList<String> getNotes() {
-        return notes;
+    public void printNotes() {
+        System.out.println("\n~ ~ ~ Notes ~ ~ ~");
+        for (String x : notes) {
+            System.out.println(x);
+        }
     }
 
-    public void setNotes(ArrayList<String> notes) {
-        this.notes = notes;
+    public void newNote(String note) {
+        notes.add(note);
     }
+
 }
