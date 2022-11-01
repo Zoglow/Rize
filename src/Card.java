@@ -31,6 +31,10 @@ public class Card {
         this.side2 = side2;
     }
 
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+
     public void printNotes() {
         System.out.println("\n~ ~ ~ Notes ~ ~ ~");
         for (String x : notes) {

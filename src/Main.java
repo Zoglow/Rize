@@ -1,54 +1,21 @@
-import java.io.*;
-import java.util.*;
+import javax.swing.*;
 
 public class Main {
 
-    static ArrayList<Card> cards = new ArrayList<>();
-    static ArrayList<Card> discardedCards = new ArrayList<>();
 
-    /**
-     * Populates card stack with csv data from file
-     */
-    public static void importCards() {
-        String front;
-        String back;
-
-        try {
-            File cardFile = new File("rizeCards.csv");
-            Scanner readCards = new Scanner(cardFile);
-            readCards.useDelimiter(",");
-
-            while (readCards.hasNextLine()) {
-                front = readCards.next();
-                back = readCards.next();
-                readCards.nextLine();
-
-                cards.add(new Card(front, back));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no file with that name.\n");
-        } catch (InputMismatchException m) {
-            System.out.println("The file did not contain valid data.");
-        }
-    }
-
-    /**
-     * Prints list of cards reviewed this session
-     */
-    public static void printSessionReview() {
-
-        System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ");
-        System.out.println("\nSession overview:");
-
-        for (Card x : discardedCards) {
-            System.out.println(x.getSide1() + " - " + x.getSide2());
-        }
-
-        System.out.println("\n~ ~ ~ ~ ~ ~ ~ ~ ~ ");
-    }
 
     public static void main(String[] args) {
-        importCards();
+
+        DeckModel deck = new DeckModel("rizeCards.csv");
+        deck.importCards();
+        MainView view = new MainView(deck);
+        view.setContentPane(view.panelMain);
+        view.setTitle("Test Title");
+        view.setSize(600, 400);
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /*
         Scanner scan = new Scanner(System.in);
 
         while (!cards.isEmpty()) {
@@ -88,5 +55,8 @@ public class Main {
         }
 
         printSessionReview();
+        */
+
+
     }
 }
