@@ -36,6 +36,11 @@ public class DeckModel {
         }
     }
 
+    public static String flipCard() {
+
+        return null;
+    }
+
     /**
      * Prints list of cards reviewed this session
      */
