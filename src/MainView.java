@@ -71,8 +71,9 @@ public class MainView extends JFrame {
 
                 if (myDeck.getCards().isEmpty()) {
                     nextView();
+                } else {
+                    newCard();
                 }
-                newCard();
             }
         });
 
