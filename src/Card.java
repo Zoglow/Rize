@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Card {
     private String side1;
     private String side2;
+    private Boolean isFlipped = false;
     private ArrayList<String> notes = new ArrayList<>();
 
     /**
@@ -18,23 +19,36 @@ public class Card {
     public String getSide1() {
         return side1;
     }
-
-    public void setSide1(String side1) {
-        this.side1 = side1;
-    }
-
     public String getSide2() {
         return side2;
     }
 
+/*
+    public void setSide1(String side1) {
+        this.side1 = side1;
+    }
     public void setSide2(String side2) {
         this.side2 = side2;
+    } */
+
+    public void setNotFlipped() {
+        isFlipped = false;
     }
 
-    public ArrayList<String> getNotes() {
-        return notes;
+//    public ArrayList<String> getNotes() {
+//        return notes;
+//    }
+
+    public String flipCard() {
+        isFlipped = (!isFlipped);
+        return (isFlipped) ? side2 : side1;
+
     }
 
+    public void addNote(String note) {
+        notes.add(note);
+    }
+    
     public void printNotes() {
         System.out.println("\n~ ~ ~ Notes ~ ~ ~");
         for (String x : notes) {
@@ -42,8 +56,6 @@ public class Card {
         }
     }
 
-    public void newNote(String note) {
-        notes.add(note);
-    }
+
 
 }

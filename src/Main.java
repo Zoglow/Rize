@@ -2,12 +2,9 @@ import javax.swing.*;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
 
-        DeckModel deck = new DeckModel("rizeCards.csv");
-        deck.importCards();
+        Deck deck = new Deck("rizeCards.csv");
         MainView view = new MainView(deck);
         view.setContentPane(view.panelMain);
         view.setTitle("Test Title");
@@ -56,7 +53,6 @@ public class Main {
 
         printSessionReview();
         */
-
 
     }
 }

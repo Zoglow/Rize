@@ -1,17 +1,13 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
 
 public class MainView extends JFrame {
 
     private static int i = 0;
-    private static boolean flipped;
-    private static DeckModel myDeck;
-    private static Card curr;
+    private static Deck myDeck;
 
     public JPanel panelMain;
     private JButton restudyButton;
@@ -22,9 +18,7 @@ public class MainView extends JFrame {
     private JButton addNoteButton;
     private JTextField notesTextField;
 
-    public MainView(DeckModel deck) {
-
-
+    public MainView(Deck deck) {
 
         this.myDeck = deck;
         newCard();
@@ -65,9 +59,7 @@ public class MainView extends JFrame {
         cardFlipButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                flipped = (!flipped);
-                String text = (flipped) ? curr.getSide2() : curr.getSide1();
-                cardFlipButton.setText(text);
+                cardFlipButton.setText(myDeck.getCurr().flipCard());
             }
         });
 
@@ -75,10 +67,9 @@ public class MainView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                myDeck.discardedCards.add(curr);
-                myDeck.cards.remove(0);
+                myDeck.discardCard();
 
-                if (myDeck.cards.isEmpty()) {
+                if (myDeck.getCards().isEmpty()) {
                     nextView();
                 }
                 newCard();
@@ -88,9 +79,18 @@ public class MainView extends JFrame {
         restudyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myDeck.cards.add(curr);
-                myDeck.cards.remove(0);
+                myDeck.restudyCard();
                 newCard();
+            }
+        });
+
+        addNoteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!notesTextField.getText().isEmpty()) {
+                    myDeck.getCurr().addNote(notesTextField.getText());
+                    notesTextField.setText("");
+                }
             }
         });
 
@@ -108,20 +108,14 @@ public class MainView extends JFrame {
             }
         });
 
-        addNoteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
     }
 
     public void newCard() {
-        flipped = false;
+        myDeck.newCard();
         i++;
-        curr = myDeck.cards.get(0);
-        this.cardFlipButton.setText(curr.getSide1());
+        this.cardFlipButton.setText(myDeck.getCurr().getSide1());
         this.notesTextArea.setText("Text testing card " + i);
     }
 

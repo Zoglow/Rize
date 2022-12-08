@@ -1,19 +1,19 @@
 import java.io.*;
 import java.util.*;
 
-public class DeckModel {
-    static String deckFile;
-    static ArrayList<Card> cards = new ArrayList<>();
-    static ArrayList<Card> discardedCards = new ArrayList<>();
+public class Deck {
+    private String deckFile;
+    private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Card> discardedCards = new ArrayList<>();
+    private Card curr;
 
-    public DeckModel(String file) {
+    public Deck(String file) {
         this.deckFile = file;
+        importCards();
+        curr = cards.get(0);
     }
 
-    /**
-     * Populates card stack with csv data from file
-     */
-    public static void importCards() {
+    public void importCards() {
         String front;
         String back;
 
@@ -36,15 +36,38 @@ public class DeckModel {
         }
     }
 
-    public static String flipCard() {
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 
-        return null;
+    public Card getCurr() {
+        return curr;
+    }
+
+    /**
+     * Populates card stack with csv data from file
+     */
+
+
+    public void restudyCard() {
+        cards.add(curr);
+        cards.remove(0);
+    }
+
+    public void discardCard() {
+        discardedCards.add(curr);
+        cards.remove(0);
+    }
+
+    public void newCard() {
+        curr.setNotFlipped();
+        curr = cards.get(0);
     }
 
     /**
      * Prints list of cards reviewed this session
      */
-    public static void printSessionReview() {
+    public void printSessionReview() {
 
         System.out.println("~ ~ ~ ~ ~ ~ ~ ~ ~ ");
         System.out.println("\nSession overview:");
