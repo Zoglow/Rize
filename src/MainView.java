@@ -1,60 +1,30 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class MainView extends JFrame {
 
-    private static int i = 0;
     private static Deck myDeck;
 
     public JPanel panelMain;
     private JButton restudyButton;
     private JButton discardButton;
     private JScrollPane notesListScroll;
-    private JTextArea notesTextArea;
     private JButton cardFlipButton;
     private JButton addNoteButton;
     private JTextField notesTextField;
 
+    private DefaultListModel listModel;
+    private JList notesList;
+
     public MainView(Deck deck) {
 
         this.myDeck = deck;
+        listModel = new DefaultListModel();
+        notesList.setModel(listModel);
+
         newCard();
-
-        /*
-        while (!myDeck.cards.isEmpty()) {
-            for (int i = 0; i < myDeck.cards.size(); i++) {
-
-                boolean keepStudying = true;
-
-
-
-                System.out.println(curr.getSide1());
-
-                while (keepStudying) {
-
-
-                    /*
-
-                    System.out.println("Flip card: F, Discard: D, Restudy: R, New note: N");
-
-                    switch (Character.toUpperCase(input)) {
-                        case 'F':
-
-                            break;
-                        case 'D':
-
-                        case 'R':
-                            keepStudying = false;
-                            break;
-                        case 'N':
-                            curr.printNotes();
-                            scan.nextLine();
-                            curr.newNote(scan.nextLine());
-                            break;
-                    }*/
 
         cardFlipButton.addActionListener(new ActionListener() {
             @Override
@@ -92,6 +62,8 @@ public class MainView extends JFrame {
                     myDeck.getCurr().addNote(notesTextField.getText());
                     notesTextField.setText("");
                 }
+
+                updateNotes();
             }
         });
 
@@ -101,23 +73,22 @@ public class MainView extends JFrame {
 
             }
         });
-
-        notesTextArea.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
-            }
-        });
-
-
-
     }
 
     public void newCard() {
         myDeck.newCard();
-        i++;
         this.cardFlipButton.setText(myDeck.getCurr().getSide1());
-        this.notesTextArea.setText("Text testing card " + i);
+        updateNotes();
+    }
+
+    public void updateNotes() {
+
+        this.listModel.clear();
+
+        for (String note: myDeck.getCurr().getNotes()) {
+            this.listModel.addElement(note);
+        }
+
     }
 
     public void nextView() {

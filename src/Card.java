@@ -19,25 +19,14 @@ public class Card {
     public String getSide1() {
         return side1;
     }
+
     public String getSide2() {
         return side2;
     }
 
-/*
-    public void setSide1(String side1) {
-        this.side1 = side1;
-    }
-    public void setSide2(String side2) {
-        this.side2 = side2;
-    } */
-
     public void setNotFlipped() {
         isFlipped = false;
     }
-
-//    public ArrayList<String> getNotes() {
-//        return notes;
-//    }
 
     public String flipCard() {
         isFlipped = (!isFlipped);
@@ -48,14 +37,16 @@ public class Card {
     public void addNote(String note) {
         notes.add(note);
     }
-    
+
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+
     public void printNotes() {
         System.out.println("\n~ ~ ~ Notes ~ ~ ~");
         for (String x : notes) {
             System.out.println(x);
         }
     }
-
-
 
 }
