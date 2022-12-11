@@ -12,10 +12,8 @@ In the final project, these three main features are implemented, as well as the 
 
 ### Instructions:
 
-```
 1. Click the middle button (with the word) to flip the card over
 2. Type into the text field and click the "Add note" button to add a note to the card
 3. Click the right button to place the card at the back of the deck for reviewing again later
 4. Click the left button to discard the card and not review it again. Finish running through the deck by clicking this button until the ending screen is reached
-```
 
