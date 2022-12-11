@@ -26,6 +26,9 @@ public class MainView extends JFrame {
 
         newCard();
 
+        /**
+         * Runs flipCard action on the current card being reviewed and displays the String value for the new side facing up
+         */
         cardFlipButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,6 +36,9 @@ public class MainView extends JFrame {
             }
         });
 
+        /**
+         * Runs discardCard action on the current card being reviewed, and sends the user to either the next card or the end screen if there are no more cards to review
+         */
         discardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,6 +53,9 @@ public class MainView extends JFrame {
             }
         });
 
+        /**
+         * Runs the restudyCard action on the current card being reviewed, and retrieves new card to be displayed
+         */
         restudyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +64,9 @@ public class MainView extends JFrame {
             }
         });
 
+        /**
+         * Runs the addNote action on the current card being reviewed using the text that the user inputs, and updates the GUI with the new notes
+         */
         addNoteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,20 +79,20 @@ public class MainView extends JFrame {
             }
         });
 
-        notesTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
+    /**
+     * Updates GUI to display new card along with its notes
+     */
     public void newCard() {
         myDeck.newCard();
         this.cardFlipButton.setText(myDeck.getCurr().getSide1());
         updateNotes();
     }
 
+    /**
+     * Updates GUI to display all the current card's notes
+     */
     public void updateNotes() {
 
         this.listModel.clear();
@@ -91,10 +103,13 @@ public class MainView extends JFrame {
 
     }
 
+    /**
+     * Displays the end view and disposes of deck view
+     */
     public void nextView() {
         EndView view = new EndView();
         view.setContentPane(view.panelMain2);
-        view.setTitle("Finished");
+        view.setTitle("Rize App");
         view.setSize(600, 400);
         view.setVisible(true);
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
